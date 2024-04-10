@@ -22,11 +22,11 @@ class Publisher():
     def send_message(self, message):
 
         try:
-            def on_connect(client, userdata, flags, rc):
-                if rc == 0:
+            def on_connect(client, userdata, flags, reason_code, properties):
+                if reason_code == 0:
                     print("Connected to MQTT Broker!")
                 else:
-                    print("Failed to connect, return code %d\n", rc)
+                    print("Failed to connect, return code %d\n", reason_code)
         except:
             pass
     
