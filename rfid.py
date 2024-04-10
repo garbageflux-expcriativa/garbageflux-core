@@ -16,9 +16,9 @@ class Rfid():
                 data = json.loads(file)
 
                 if (self.id in data["rfids"]):
-                    return 1
+                    return 'y'
                 
-                return 0
+                return 'n'
             
         except Exception as e:
 
