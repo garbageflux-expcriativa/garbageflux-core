@@ -16,7 +16,7 @@ class Ultrasonic():
 
         try:
 
-            if (self.distance <= os.getenv("DISTANCE")):
+            if (float(self.distance) <= float(os.getenv("DISTANCE"))):
                 return 1
             
             return 0
