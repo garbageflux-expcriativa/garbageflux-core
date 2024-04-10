@@ -31,7 +31,7 @@ class Publisher():
             pass
     
 
-        if (self.user != "" or self.user != None):
+        if (self.user != ""):
             self.client.username_pw_set(self.user, password=self.password)
 
         self.client.on_connect = on_connect

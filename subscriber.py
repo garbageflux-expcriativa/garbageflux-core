@@ -25,7 +25,7 @@ class Subscriber():
             print(f"Received message '{message.payload.decode()}' on topic '{message.topic}'")
 
         # Configura credenciais
-        if (self.user != "" or self.user != None):
+        if (self.user != ""):
             self.client.username_pw_set(self.user, password=self.password)
 
         # Define os callbacks
