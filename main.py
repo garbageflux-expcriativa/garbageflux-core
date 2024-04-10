@@ -27,13 +27,11 @@ def on_ultrasonic_message(message):
     publisher.send_message(ultrasonic.verify_distance())
 
 def setup_subscriber(topic, on_message_callback):
-    subscriber = Subscriber()
+    subscriber = Subscriber(on_message_callback)
     subscriber.define_topic(topic)
-    subscriber.client.on_message = on_message_callback
     return subscriber
 
 def run_subscriber(subscriber):
-    subscriber.client.loop_start()
     subscriber.listen_message()
 
 def main():
