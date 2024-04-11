@@ -24,6 +24,9 @@ def on_ultrasonic_message(message, publisher):
     publisher.define_topic(os.getenv("ACTUATOR_TOPIC"))
     publisher.send_message(ultrasonic.verify_distance())
 
+    publisher.define_topic(os.getenv("DASHBOARD_TOPIC"))
+    publisher.send_message(ultrasonic.verify_distance())
+
 def setup_subscriber(topic, on_message_callback):
     subscriber = Subscriber(on_message_callback)
     subscriber.define_topic(topic)
