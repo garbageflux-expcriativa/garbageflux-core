@@ -22,7 +22,7 @@ class Subscriber():
     def listen_message(self):
         
         def on_message(client, userdata, message):
-            print(f"Received message '{message.payload.decode()}' on topic '{message.topic}'")
+            print(f"Received message '{message.payload.decode()}' on topic '{message.topic}'\n")
             self.on_message_callback(message)  # Chama a função de callback
 
         if (self.user != ""):
