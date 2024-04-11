@@ -9,16 +9,27 @@ class Rfid():
 
     def verify_rfid(self):
 
+        response_dict = dict()
+
         try:
 
-            with open("rfids.json") as file:
+            with open("rfids.json", "r") as file:
 
-                data = json.loads(file)
+                json_content = file.read()
 
-                if (self.id in data["rfids"]):
-                    return 'y'
+                data = json.loads(json_content)
+
+                if (self.id in data["rfid"]):
+
+                    response_dict["responsecode"] = "y"
+                    response_dict["garbageid"] = self.garbage_id
+
+                    return json.dumps(response_dict)
                 
-                return 'n'
+                response_dict["responsecode"] = "n"
+                response_dict["garbageid"] = self.garbage_id
+
+                return json.dumps(response_dict)
             
         except Exception as e:
 

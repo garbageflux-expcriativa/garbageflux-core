@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
@@ -14,12 +15,21 @@ class Ultrasonic():
 
     def verify_distance(self):
 
+        response_dict = dict()
+
         try:
 
             if (float(self.distance) <= float(os.getenv("DISTANCE"))):
-                return 1
+
+                response_dict["responsecode"] = "1"
+                response_dict["garbageid"] = self.garbage_id
+
+                return json.dumps(response_dict)
             
-            return 0
+            response_dict["responsecode"] = "0"
+            response_dict["garbageid"] = self.garbage_id
+
+            return json.dumps(response_dict)
             
         except Exception as e:
 
