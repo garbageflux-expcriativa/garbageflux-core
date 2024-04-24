@@ -32,7 +32,7 @@ def on_ultrasonic_message(message, publisher):
 
     if is_id_registered(data["garbageid"]):
         publisher.define_topic(os.getenv("DASHBOARD_TOPIC"))
-        publisher.send_message(message)
+        publisher.send_message(message.payload)
         print(f"Message SENT to {os.getenv("DASHBOARD_TOPIC")}.")
     else:
         print(f"ID {data['garbageid']} not registered, ignoring {os.getenv("DASHBOARD_TOPIC")} publish.")
