@@ -32,3 +32,5 @@ def is_id_registered(check_id, filepath="registeredIds.json"):
     data = load_registered_ids(filepath)
     return check_id in data["registeredIds"]
 
+def return_ids( filepath="registeredIds.json"):
+    return load_registered_ids(filepath)
