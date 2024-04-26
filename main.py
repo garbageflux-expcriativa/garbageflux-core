@@ -27,13 +27,20 @@ def on_ultrasonic_message(message, publisher):
     ultrasonic = Ultrasonic(data["distance"], data["garbageid"])
     
     publisher.define_topic(os.getenv("ACTUATOR_TOPIC"))
-    publisher.send_message(ultrasonic.verify_distance())
+
+    ultrasonicResponse = ultrasonic.verify_distance()
+
+    publisher.send_message(ultrasonicResponse)
+
+    ultrasonicResponse = json.loads(ultrasonicResponse)
+
     print(f"Message SENT to {os.getenv("ACTUATOR_TOPIC")}.")
 
     if is_id_registered(data["garbageid"]):
         publisher.define_topic(os.getenv("DASHBOARD_TOPIC"))
-        publisher.send_message(message.payload)
-        print(f"Message SENT to {os.getenv("DASHBOARD_TOPIC")}.")
+        data["status"] = ultrasonicResponse["responsecode"]
+        publisher.send_message(json.dumps(data))
+        print(f"Message {data} SENT to {os.getenv("DASHBOARD_TOPIC")}.")
     else:
         print(f"ID {data['garbageid']} not registered, ignoring {os.getenv("DASHBOARD_TOPIC")} publish.")
 
