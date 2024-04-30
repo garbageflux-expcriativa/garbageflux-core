@@ -64,6 +64,7 @@ def on_register_message(message, publisher):
         data = json.dumps(registeredIds)
         publisher.define_topic(os.getenv("REQUEST_TOPIC"))
         publisher.send_message(data)
+        print(f"Message {data} SENT to {os.getenv("REQUEST_TOPIC")}.")
 
 def setup_subscriber(topic, on_message_callback):
     subscriber = Subscriber(on_message_callback)
