@@ -87,7 +87,7 @@ def main():
     publisher3 = Publisher()
 
     rfid_subscriber = setup_subscriber(os.getenv("RFID_TOPIC"), lambda msg: on_rfid_message(session, msg, publisher1))
-    ultrasonic_subscriber = setup_subscriber(os.getenv("ULTRASONIC_TOPIC"), lambda msg: on_ultrasonic_message(msg, publisher2, session))
+    ultrasonic_subscriber = setup_subscriber(os.getenv("ULTRASONIC_TOPIC"), lambda msg: on_ultrasonic_message(session, msg, publisher2))
     register_subscriber = setup_subscriber(os.getenv("REGISTER_TOPIC"), lambda msg: on_register_message(session, msg, publisher3))
 
     rfid_thread = threading.Thread(target=run_subscriber, args=(rfid_subscriber,))
